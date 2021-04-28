@@ -16,15 +16,6 @@ static int	len_dec(unsigned int p)
 	return (i);
 }
 
-static void	wrt(t_elem *elem, char c)
-{
-	while (elem->len > elem->len_dot && elem->len > elem->len_data)
-	{
-		write(1, &c, 1);
-		elem->len--;
-	}
-}
-
 static void	print_dot(t_elem *elem, unsigned int p)
 {
 	int	count_dot;
@@ -32,8 +23,12 @@ static void	print_dot(t_elem *elem, unsigned int p)
 	count_dot = elem->len_dot;
 	if (!elem->len_dot && !p)
 		elem->len_data = 0;
-	if (!elem->minus)
+	if (!elem->minus && elem->len_dot != -1)
 		wrt(elem, ' ');
+	else if (!elem->minus && !elem->zero && elem->len_dot == -1)
+		wrt(elem, ' ');
+	else if (elem->len_dot == -1 && elem->zero)
+		wrt(elem, '0');
 	while (count_dot > elem->len_data)
 	{
 		write(1, "0", 1);

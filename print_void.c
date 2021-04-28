@@ -43,6 +43,15 @@ static void	dot(t_elem *elem, long long p)
 		converter(p, 0);
 }
 
+static void	print_zero(long long p)
+{
+	write(1, "0x", 2);
+	if (!p)
+		write(1, "0", 1);
+	else
+		converter(p, 0);
+}
+
 int	print_void(t_elem *elem, int sum, va_list *ap)
 {
 	long long	p;
@@ -54,8 +63,7 @@ int	print_void(t_elem *elem, int sum, va_list *ap)
 		dot(elem, p);
 	else if (elem->minus)
 	{
-		write(1, "0x", 2);
-		converter(p, 0);
+		print_zero(p);
 		while (elem->len > elem->len_data)
 			print_space(elem);
 	}
@@ -63,11 +71,7 @@ int	print_void(t_elem *elem, int sum, va_list *ap)
 	{
 		while (elem->len > elem->len_data)
 			print_space(elem);
-		write(1, "0x", 2);
-		if (!p)
-			write(1, "0", 1);
-		else
-			converter(p, 0);
+		print_zero(p);
 	}
 	return (sum);
 }

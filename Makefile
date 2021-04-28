@@ -3,7 +3,8 @@ SRC 	=	ft_strlen.c		ft_strchr.c		printf.c		\
 			print_int.c		print_unsint.c	print_hex.c		\
 			print_hex_big.c	print_flags.c	zero_list.c		\
 			maxint.c		converter.c		ft_putnbr_int.c	\
-			ft_putnbr_uns.c	converter_big.c
+			ft_putnbr_uns.c	converter_big.c	wrt.c			\
+			len_int.c
 
 OBJ		= ${patsubst %.c, %.o, ${SRC}}
 
