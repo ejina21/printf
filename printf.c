@@ -111,8 +111,8 @@ int	ft_printf(char *fmt, ...)
 			fmt++;
 			zero_list(&elem);
 			fmt = flags(fmt, &elem, &ap);
-			if (ft_strchr("cspdiuxX", (int)*fmt))
-				sum += params(*fmt, &elem, &ap);
+			if (!*fmt)
+				return (sum);
 			else
 				sum += params(*fmt, &elem, &ap);
 			fmt++;

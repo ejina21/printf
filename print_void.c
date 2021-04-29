@@ -32,7 +32,7 @@ static void	dot(t_elem *elem, long long p)
 	write(1, "0x", 2);
 	if (!p)
 		elem->len_data--;
-	while (elem->len_dot > elem->len_data - 2)
+	while (elem->len_dot > elem->len_data - 2 && elem->len_dot)
 	{
 		write(1, "0", 1);
 		elem->len_dot--;
@@ -58,6 +58,8 @@ int	print_void(t_elem *elem, int sum, va_list *ap)
 
 	p = va_arg(*ap, long long);
 	elem->len_data = len_dec(p) + 2;
+	if (!p && !elem->len_dot && elem->dot)
+		elem->len_data = 2;
 	sum = intmax(elem->len, elem->len_dot + 2, elem->len_data);
 	if (elem->dot)
 		dot(elem, p);
